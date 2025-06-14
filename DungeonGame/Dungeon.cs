@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Name: Carter Robbins Date: 6/13/25
+using System;
 using System.Collections.Generic;
 
 
@@ -6,11 +7,11 @@ namespace DungeonGame
 {
     public class Dungeon
     {
-        public const int Size = 10;
+        public const int Size = 10; // Size of the dungeon grid
         public Cell[,] Grid { get; private set; }
         private Random rand = new Random();
 
-        public Dungeon()
+        public Dungeon() // Constructor to initialize the dungeon grid and generate the maze
         {
             Grid = new Cell[Size, Size];
             InitializeGrid();
@@ -18,23 +19,23 @@ namespace DungeonGame
             Grid[Size - 1, Size - 1].IsExit = true;
         }
 
-        private void InitializeGrid()
-        {
+        private void InitializeGrid() // Initializes the dungeon grid with cells
+        { 
             for (int y = 0; y < Size; y++)
                 for (int x = 0; x < Size; x++)
                     Grid[x, y] = new Cell();
         }
 
-        private void GenerateMaze(int x, int y)
+        private void GenerateMaze(int x, int y) // Recursive method to generate the maze using a randomized depth-first search algorithm
         {
             Grid[x, y].Visited = true;
-            var directions = new List<(int dx, int dy)>
+            var directions = new List<(int dx, int dy)> 
         {
             (0, -1), (1, 0), (0, 1), (-1, 0)
         };
             directions.Sort((a, b) => rand.Next(-1, 2)); // shuffle directions randomly
 
-            foreach (var (dx, dy) in directions)
+            foreach (var (dx, dy) in directions) // Iterate through each direction
             {
                 int nx = x + dx;
                 int ny = y + dy;

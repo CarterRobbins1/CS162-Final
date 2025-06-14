@@ -1,9 +1,10 @@
-﻿using System;
+﻿//Name: Carter Robbins Date: 6/13/25
+using System;
 
 
 namespace DungeonGame
 {
-    public class Delver
+    public class Delver // Represents the player character in the dungeon game
     {
         public int X { get; private set; }
         public int Y { get; private set; }

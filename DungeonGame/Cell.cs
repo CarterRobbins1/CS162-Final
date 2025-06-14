@@ -1,4 +1,5 @@
-﻿//Simple class that acts as one cell in the dungeon grid.
+﻿//Name: Carter Robbins Date: 6/13/25
+//Simple class that acts as one cell in the dungeon grid.
 // Each cell has walls on all four sides, a visited flag, and an exit flag.
 using DungeonGame;
 public class Cell

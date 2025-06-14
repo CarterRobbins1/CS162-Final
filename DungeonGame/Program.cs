@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Name: Carter Robbins Date: 6/13/25
+using System;
 
 namespace DungeonGame
 {
@@ -6,7 +7,7 @@ namespace DungeonGame
     {
         public static void Main(string[] args)
         {
-            Game.Run();
+            Game.Run(); // Start the game
         }
     }
 }

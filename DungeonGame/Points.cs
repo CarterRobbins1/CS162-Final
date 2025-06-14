@@ -1,11 +1,11 @@
-﻿
+﻿//Name: Carter Robbins Date: 6/13/25
 namespace DungeonGame
 {
     public class Points
     {
         private int score;
 
-        public Points()
+        public Points() // Constructor to initialize the score
         {
             score = 100;
         }
@@ -16,12 +16,12 @@ namespace DungeonGame
             if (score < 0) score = 0; // Ensure score doesn't go negative
         }
 
-        public void Add(int amount)
+        public void Add(int amount) // Adds points to the score
         {
-            score += amount;
+            score += amount; 
         }
 
-        public int GetScore()
+        public int GetScore() // Returns the current score
         {
             return score;
         }

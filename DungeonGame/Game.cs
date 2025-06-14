@@ -1,17 +1,18 @@
-﻿using System;
+﻿//Name: Carter Robbins Date: 6/13/25
+using System;
 
 namespace DungeonGame
 {
-    class Game
+    class Game // Main game class that runs the dungeon exploration game
     {
         public static void Run()
         {
-            Dungeon dungeon = new Dungeon();
-            Delver player = new Delver(0, 0);
-            Points points = new Points();
-            Random rand = new Random();
+            Dungeon dungeon = new Dungeon(); // Initializes the dungeon
+            Delver player = new Delver(0, 0); // Creates the player at the starting position (0, 0)
+            Points points = new Points(); // Initializes the points system
+            Random rand = new Random(); // Random number generator for monster encounters
 
-            List<Monster> monsters = new List<Monster>
+            List<Monster> monsters = new List<Monster> //Creates a list of monsters
             {
                 new Monster("Goblin", 10, 5),
                 new Monster("Goblin", 10, 5),
@@ -28,27 +29,27 @@ namespace DungeonGame
             Console.WriteLine("Use W (up), A (left), S (down), D (right) to move.");
             Console.WriteLine("Reach the 'E' to escape. Press 'Q' to quit.");
 
-            while (true)
+            while (true) // Main game loop
             {
-                Console.Clear();
+                Console.Clear(); // Clear the console for each turn
                 dungeon.PrintWithPlayer(player);
                 Console.WriteLine($"Points: {points.GetScore()}");
 
                 bool atExit = player.AtExit(dungeon.Grid);
 
-                if (atExit)
+                if (atExit) // Check if the player is on the exit tile
                 {
                     Console.WriteLine("\nYou are standing on the exit tile.");
                     Console.Write("Press 'E' to escape or W/A/S/D to keep exploring: ");
                 }
-                else
+                else // If not at exit, prompt for movement
                 {
                     Console.Write("\nMove (W/A/S/D): ");
                 }
 
                 char input = Char.ToLower(Console.ReadKey(true).KeyChar);
 
-                if (input == 'q')
+                if (input == 'q') // Quit the game
                 {
                     Console.WriteLine("You gave up. Game over.");
                     Console.WriteLine($"Final Score: {points.GetScore()}");
@@ -64,12 +65,12 @@ namespace DungeonGame
                     break;
                 }
 
-                if ("wasd".Contains(input))
+                if ("wasd".Contains(input)) // Check if input is a valid movement command
                 {
                     player.Move(input.ToString(), dungeon.Grid);
                     points.Deduct();
 
-                    if (monsters.Count > 0 && rand.Next(0, 4) == 0)
+                    if (monsters.Count > 0 && rand.Next(0, 4) == 0) // 25% chance of encountering a monster
                     {
                         int index = rand.Next(monsters.Count);
                         Monster encounter = monsters[index];
