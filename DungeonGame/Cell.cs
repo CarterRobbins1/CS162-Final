@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DungeonGame
+﻿//Simple class that acts as one cell in the dungeon grid.
+// Each cell has walls on all four sides, a visited flag, and an exit flag.
+public class Cell
 {
-    internal class Cell
-    {
-    }
+    public bool Top = true;
+    public bool Left = true;
+    public bool Bottom = true;
+    public bool Right = true;
+    public bool Visited = false;
+    public bool IsExit = false;
 }

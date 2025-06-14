@@ -1,12 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DungeonGame;
 
-namespace DungeonGame
+
+public class Dungeon
 {
-    internal class Dungeon
+    public const int Size = 10;
+    public Cell[,] Grid { get; private set; }
+    private Random rand = new Random();
+
+    public Dungeon()
     {
+        Grid = new Cell[Size, Size];
+        InitializeGrid();
+        GenerateMaze(0, 0);
+        Grid[Size - 1, Size - 1].IsExit = true;
+    }
+
+    private void InitializeGrid()
+    {
+        for (int y = 0; y < Size; y++)
+            for (int x = 0; x < Size; x++)
+                Grid[x, y] = new Cell();
+    }
+
+    private void GenerateMaze(int x, int y)
+    {
+
     }
 }
