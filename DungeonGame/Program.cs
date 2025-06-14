@@ -1,3 +1,13 @@
-﻿using DungeonGame;
+﻿using System;
 
-Game.Main();
+namespace DungeonGame
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            Game.Run();
+        }
+    }
+}
+
