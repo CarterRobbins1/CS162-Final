@@ -1,0 +1,24 @@
+# Build results
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+
+# User-specific settings
+.vs/
+*.user
+*.suo
+*.csproj.user
+
+# Logs and temp files
+*.log
+*.tmp
+*.cache
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Rider/JetBrains IDEs (if ever used)
+.idea/
