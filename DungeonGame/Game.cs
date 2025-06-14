@@ -9,6 +9,20 @@ namespace DungeonGame
             Dungeon dungeon = new Dungeon();
             Delver player = new Delver(0, 0);
             Points points = new Points();
+            Random rand = new Random();
+
+            List<Monster> monsters = new List<Monster>
+            {
+                new Monster("Goblin", 10, 5),
+                new Monster("Goblin", 10, 5),
+                new Monster("Goblin", 10, 5),
+                new Monster("Goblin", 10, 5),
+                new Monster("Goblin", 10, 5),
+                new Monster("Slime", 50, 10),
+                new Monster("Slime", 50, 10),
+                new Monster("Slime", 50, 10),
+                new Monster("Ogre", 100, 15)
+            };
 
             Console.WriteLine("Welcome to the Dungeon!");
             Console.WriteLine("Use W (up), A (left), S (down), D (right) to move.");
@@ -54,6 +68,26 @@ namespace DungeonGame
                 {
                     player.Move(input.ToString(), dungeon.Grid);
                     points.Deduct();
+
+                    if (monsters.Count > 0 && rand.Next(0, 4) == 0)
+                    {
+                        int index = rand.Next(monsters.Count);
+                        Monster encounter = monsters[index];
+
+                        if (encounter.AttemptDefeat(rand))
+                        {
+                            Console.WriteLine($"You defeated the {encounter.Name}! +{encounter.Points} points.");
+                            points.Add(encounter.Points);
+                            monsters.RemoveAt(index);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"The {encounter.Name} defeated you. No points gained.");
+                        }
+
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey();
+                    }
                 }
                 else
                 {
