@@ -7,11 +7,14 @@ namespace DungeonGame
     {
         public int X { get; private set; }
         public int Y { get; private set; }
+
+        // Constructor to initialize the delver's position
         public Delver(int startX, int startY)
         {
             X = startX;
             Y = startY;
         }
+
         public void Move(string direction, Cell[,] grid)
         {
             int newX = X;
@@ -40,7 +43,7 @@ namespace DungeonGame
                 Y = newY;
             }
         }
-        /// Check if the delver is at the exit cell
+        // Check if the delver is at the exit cell
         public bool AtExit(Cell[,] grid)
         {
             return grid[X, Y].IsExit;
