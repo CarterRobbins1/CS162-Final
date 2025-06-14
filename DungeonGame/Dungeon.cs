@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using DungeonGame;
 
 
 public class Dungeon
@@ -26,6 +25,28 @@ public class Dungeon
 
     private void GenerateMaze(int x, int y)
     {
+        Grid[x, y].Visited = true;
+        var directions = new List<(int dx, int dy)>
+        {
+            (0, -1), (1, 0), (0, 1), (-1, 0)
+        };
+        directions.Sort((a, b) => rand.Next(-1, 2)); // shuffle directions randomly
 
+        foreach (var (dx, dy) in directions)
+        {
+            int nx = x + dx;
+            int ny = y + dy;
+
+            if (nx >= 0 && ny >= 0 && nx < Size && ny < Size && !Grid[nx, ny].Visited)
+            {
+                // Remove walls between current and neighbor
+                if (dx == 1) { Grid[x, y].Right = false; Grid[nx, ny].Left = false; }
+                if (dx == -1) { Grid[x, y].Left = false; Grid[nx, ny].Right = false; }
+                if (dy == 1) { Grid[x, y].Bottom = false; Grid[nx, ny].Top = false; }
+                if (dy == -1) { Grid[x, y].Top = false; Grid[nx, ny].Bottom = false; }
+
+                GenerateMaze(nx, ny);
+            }
+        }
     }
 }
