@@ -8,6 +8,7 @@ namespace DungeonGame
         {
             Dungeon dungeon = new Dungeon();
             Delver player = new Delver(0, 0);
+            Points points = new Points();
 
             Console.WriteLine("Welcome to the Dungeon!");
             Console.WriteLine("Use W (up), A (left), S (down), D (right) to move.");
@@ -17,6 +18,7 @@ namespace DungeonGame
             {
                 Console.Clear();
                 dungeon.PrintWithPlayer(player);
+                Console.WriteLine($"Points: {points.GetScore()}");
 
                 bool atExit = player.AtExit(dungeon.Grid);
 
@@ -35,12 +37,14 @@ namespace DungeonGame
                 if (input == 'q')
                 {
                     Console.WriteLine("You gave up. Game over.");
+                    Console.WriteLine($"Final Score: {points.GetScore()}");
                     break;
                 }
 
                 if (atExit && input == 'e')
                 {
-                    Console.WriteLine("\n🎉 You escaped the dungeon!");
+                    Console.WriteLine("\nYou escaped the dungeon!");
+                    Console.WriteLine($"Final Score: {points.GetScore()}");
                     Console.WriteLine("Press any key to exit...");
                     Console.ReadKey();
                     break;
@@ -49,6 +53,7 @@ namespace DungeonGame
                 if ("wasd".Contains(input))
                 {
                     player.Move(input.ToString(), dungeon.Grid);
+                    points.Deduct();
                 }
                 else
                 {
