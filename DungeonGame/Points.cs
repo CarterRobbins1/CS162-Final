@@ -16,6 +16,11 @@ namespace DungeonGame
             if (score < 0) score = 0; // Ensure score doesn't go negative
         }
 
+        public void Add(int amount)
+        {
+            score += amount;
+        }
+
         public int GetScore()
         {
             return score;
