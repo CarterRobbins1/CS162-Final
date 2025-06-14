@@ -1,45 +1,60 @@
 ﻿using System;
-using DungeonGame;
 
-class Game
+namespace DungeonGame
 {
-    public static void Run()
+    class Game
     {
-        Dungeon dungeon = new Dungeon();
-        Delver player = new Delver(0, 0);
-
-        Console.WriteLine("Welcome to the Dungeon!");
-        Console.WriteLine("Use W (up), A (left), S (down), D (right) to move.");
-        Console.WriteLine("Reach the 'E' to escape. Press 'Q' to quit.");
-
-        while (true)
+        public static void Run()
         {
-            Console.Clear();
-            dungeon.PrintWithPlayer(player);
+            Dungeon dungeon = new Dungeon();
+            Delver player = new Delver(0, 0);
 
-            if (player.AtExit(dungeon.Grid))
-            {
-                Console.WriteLine("\n🎉 You escaped the dungeon!");
-                break;
-            }
+            Console.WriteLine("Welcome to the Dungeon!");
+            Console.WriteLine("Use W (up), A (left), S (down), D (right) to move.");
+            Console.WriteLine("Reach the 'E' to escape. Press 'Q' to quit.");
 
-            Console.Write("\nMove (W/A/S/D): ");
-            string input = Console.ReadLine().ToLower();
+            while (true)
+            {
+                Console.Clear();
+                dungeon.PrintWithPlayer(player);
 
-            if (input == "q")
-            {
-                Console.WriteLine("You gave up. Game over.");
-                break;
-            }
+                bool atExit = player.AtExit(dungeon.Grid);
 
-            if ("wasd".Contains(input))
-            {
-                player.Move(input, dungeon.Grid);
-            }
-            else
-            {
-                Console.WriteLine("Invalid input. Use W, A, S, D to move.");
-                Console.ReadKey();
+                if (atExit)
+                {
+                    Console.WriteLine("\nYou are standing on the exit tile.");
+                    Console.Write("Press 'E' to escape or W/A/S/D to keep exploring: ");
+                }
+                else
+                {
+                    Console.Write("\nMove (W/A/S/D): ");
+                }
+
+                char input = Char.ToLower(Console.ReadKey(true).KeyChar);
+
+                if (input == 'q')
+                {
+                    Console.WriteLine("You gave up. Game over.");
+                    break;
+                }
+
+                if (atExit && input == 'e')
+                {
+                    Console.WriteLine("\n🎉 You escaped the dungeon!");
+                    Console.WriteLine("Press any key to exit...");
+                    Console.ReadKey();
+                    break;
+                }
+
+                if ("wasd".Contains(input))
+                {
+                    player.Move(input.ToString(), dungeon.Grid);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Use W, A, S, D to move.");
+                    Console.ReadKey();
+                }
             }
         }
     }
